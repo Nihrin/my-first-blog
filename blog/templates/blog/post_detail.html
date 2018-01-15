@@ -25,8 +25,10 @@
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a><br><br>
     {% for comment in post.comments.all %}
         <div class="comment">
+            <div class="textcolor">
             <strong>{{ comment.author }}</strong>
             <p>{{ comment.get_markdown|linebreaks }}</p>
+            </div>
             <div class="date">
                 {{ comment.created_date }}
             </div>
