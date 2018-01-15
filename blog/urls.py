@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
@@ -12,4 +13,8 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     url(r'^accounts/signup/$', views.signup, name='signup'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^postdata/$', views.PostList.as_view, name='postdata'),
+    url(r'^commentdata/$', views.CommentList.as_view, name='commentdata'),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
