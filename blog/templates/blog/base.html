@@ -1,0 +1,46 @@
+<DOCTYPE! html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Bloggish</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+    </head>
+
+    <body>
+      <div class="page-header">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="top-menu" title="Logout"><span class="glyphicon glyphicon-off"></span></a>
+            <a href="{% url 'post_new' %}" class="top-menu" title="New Post"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{% url 'post_draft_list' %}" class="top-menu" title="Draft List"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="{% url 'profile' %}" class="top-menu" title="Your Posts"><span class="glyphicon glyphicon-user"></span></a>
+            <p class="top-menu">Hello {{ user.username }} </p>
+        {% else %}
+            <a href="{% url 'login' %}" class="top-menu" title="Login"><span class="glyphicon glyphicon-lock"></span></a>
+            <a href="{% url 'signup' %}" class="top-menu" title="Signup"><span class="glyphicon glyphicon-user"></span></a>            
+        {% endif %}
+        <h1><a href="/">Bloggish</a></h1>
+      </div>
+      <div class="space"></div>
+      <div class="explain">
+         <div class="row">
+            <div class="col-md-8">
+                What can be done on this site. You can read, write, comment on and edit blogs.<br>
+                The basics of the backend comes from the django girls blog tutorial. Besides the basics a signup function has been added, as well as some security as to who can make changes to waht parts of the site. 
+            </div>
+        </div>
+      </div>
+      <div class="content container">
+        <div class="row">
+           <div class="col-md-8">
+             {% block content %}
+             {% endblock %}
+            </div>
+         </div>
+      </div>
+    </body>
+</html>

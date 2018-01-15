@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {% for post in posts %}
+    {% if post.author == request.user %}
+        <div class="post">
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.get_markdown|linebreaksbr }}</p>
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        </div>
+        <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
